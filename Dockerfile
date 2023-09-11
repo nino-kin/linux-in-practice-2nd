@@ -1,10 +1,9 @@
-# ベースイメージを指定
 FROM ubuntu:20.04
 
 ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# パッケージのインストール
+# Install packages
 RUN apt-get update && apt-get install -y \
     binutils \
     build-essential \
@@ -23,10 +22,8 @@ RUN apt-get update && apt-get install -y \
     containerd \
     libvirt-daemon-system
 
-# ユーザーをlibvirtおよびkvmグループに追加
-RUN adduser `id -un` libvirt
-RUN adduser `id -un` libvirt-qemu
-RUN adduser `id -un` kvm
+# Add user
+RUN adduser `id -un` libvirt && adduser `id -un` libvirt-qemu && adduser `id -un` kvm
 
-# イメージ内での作業ディレクトリを設定
+# Working directory
 WORKDIR /workspace
