@@ -33,7 +33,7 @@ help:
 build:
 	docker build -t $(IMAGE_NAME) .
 #	docker build --no-cache -t $(IMAGE_NAME) .
-	docker run -d $(DOCKER_MOUNT_ROOT) --name $(CONTAINER_NAME) $(IMAGE_NAME)
+#	docker run -d $(DOCKER_MOUNT_ROOT) --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 # Run Docker container
 run:
@@ -43,6 +43,10 @@ run:
 # Execute shell in running container
 exec:
 	docker exec -it $(CONTAINER_NAME) bash
+
+# Start stopped container
+start:
+	docker start $(CONTAINER_NAME)
 
 # Stop running container
 stop:
